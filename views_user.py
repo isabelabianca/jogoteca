@@ -1,5 +1,6 @@
 from flask import (
     render_template, request, session, flash, redirect, url_for)
+from flask_bcrypt import check_password_hash
 
 from jogoteca import app
 from models import Usuarios
@@ -19,12 +20,14 @@ def autenticar():
 
     usuario = Usuarios.query.filter_by(
         nickname=form.nickname.data).first()
-    if usuario:
-        if form.senha.data == usuario.senha:
-            session['usuario_logado'] = usuario.nickname
-            flash(usuario.nickname + ' logado com sucesso!')
-            proxima_pagina = request.form['proxima']
-            return redirect(proxima_pagina)
+
+    senha = check_password_hash(usuario.senha, form.senha.data)
+
+    if usuario and senha:
+        session['usuario_logado'] = usuario.nickname
+        flash(usuario.nickname + ' logado com sucesso!')
+        proxima_pagina = request.form['proxima']
+        return redirect(proxima_pagina)
     else:
         flash('Usuário não logado.')
         return redirect(url_for('login'))
