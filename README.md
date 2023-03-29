@@ -14,7 +14,7 @@ Executar projeto:
 
 `cd jogoteca`
 
-`python main.py`
+`python jogoteca.py`
 
 
 Para visitar a página, abrir navegador com a URL:
