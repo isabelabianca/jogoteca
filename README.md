@@ -15,3 +15,11 @@ Executar projeto:
 `cd jogoteca`
 
 `python main.py`
+
+
+Para visitar a página, abrir navegador com a URL:
+
+http://localhost:5000
+
+Usuário: BD
+Senha: alohomora
